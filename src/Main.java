@@ -23,6 +23,8 @@ public class Main extends Application {
     Rectangle floor = new Rectangle();
     Text score = new Text();
 
+    Pipe topPipe = new Pipe();
+
     @Override
     public void start(Stage stage) {
         Group root = new Group();
@@ -40,11 +42,16 @@ public class Main extends Application {
         score.setFont(new Font(15));
         score.setText("Score: " + player.score);
 
+        topPipe.setY(0);
+        topPipe.setX(pipe.getX());
+        topPipe.setWidth(pipe.getWidth());
+        topPipe.setHeight(pipe.getY() - 50);
 
         list.add(player);
         list.add(floor);
         list.add(score);
         list.add(pipe);
+        list.add(topPipe);
         Scene scene = new Scene(root, 600, 300);
 
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -79,7 +86,7 @@ public class Main extends Application {
             public void handle(long currentNanoTime){
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
 
-                if(checkBounds(player, pipe)){
+                if(checkBounds(player, pipe) || checkBounds(player, topPipe)){
                     player.alive = false;
                 }
 
@@ -92,7 +99,11 @@ public class Main extends Application {
 
                 if(player.alive){
                     player.move();
+
                     pipe.moveLEFT();
+                    topPipe.setX(pipe.getX());
+                    topPipe.setHeight(pipe.getY() - 100);
+
                     gravity(player);
                 }else{
                     return;
