@@ -59,7 +59,7 @@ public class Sprite extends Rectangle {
     }
 
     public void jump() {
-        for (int i = 0; i <= 5; i++) {
+        for (int i = 0; i <= 6; i+=2) {
             this.setY(this.getY() - i);
         }
 

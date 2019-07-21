@@ -131,8 +131,8 @@ public class Main extends Application {
     }
 
     public static boolean checkBounds(Sprite s, Rectangle r){
-        if(s.getX() >= r.getX() && s.getX() + s.getWidth() <= r.getX() + r.getWidth()){
-            if(s.getY() >= r.getY() && s.getY() + s.getHeight() <= r.getY() + r.getHeight()){
+        if(s.getX()+s.getWidth() >= r.getX() && s.getX() <= r.getX() + r.getWidth()){
+            if(s.getY() + s.getHeight() >= r.getY() && s.getY() <= r.getY() + r.getHeight()){
                 return true;
             }
         }
